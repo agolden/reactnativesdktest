@@ -69,4 +69,4 @@
 1. Launch application (login screen appears)
 2. Select 'Use Custom Domain'
 3. Enter totally fake custom domain, e.g., 'ABCDEFG' (error message appears: "SERVER ERROR'; "Can't connect to the server....")
-4. Select 'Dismiss'; As shown in 'app.js' on line 55, the failure callback is invoked and 'Failed to authenticate' is written to the react native logs.
+4. Select 'Dismiss'; As shown in 'app.js' on line 55, the failure callback is invoked and 'Failed to authenticate' is written to the react native logs; User returned to the react-native app (i.e., the webview showing Salesforce is closed)
