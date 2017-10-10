@@ -48,7 +48,7 @@
         cd ~/reactnativesdktest/ios
         open sdktest.xcworkspace
 
-4. Run application from Xcode
+4. Run application from Xcode (Suggest viewing on iPhone 7)
 
 ## View React Native Logs ##
 
