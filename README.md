@@ -44,6 +44,7 @@
         npm start
 
 3. Open workspace in Xcode (using separate terminal window):
+
         cd ~/reactnativesdktest/ios
         open sdktest.xcworkspace
 
