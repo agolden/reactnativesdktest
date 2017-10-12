@@ -28,6 +28,7 @@ import React from 'react';
 import {
     StyleSheet,
     Text,
+    Button,
     View,
     FlatList,
 } from 'react-native';
@@ -42,19 +43,7 @@ class UserListScreen extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {data: []};
-    }
-    
-    componentDidMount() {
-        var that = this;
-        oauth.getAuthCredentials(
-            () => that.fetchData(), // already logged in
-            () => {
-                oauth.authenticate(
-                    () => that.fetchData(),
-                    (error) => console.log('Failed to authenticate:' + error)
-                );
-            });
+        this.state = {data: [], showError: false, showSuccess: false};
     }
 
     fetchData() {
@@ -64,16 +53,37 @@ class UserListScreen extends React.Component {
                  );
     }
 
+    onLogin() {
+      var that = this;
+      oauth.getAuthCredentials(
+          () => that.fetchData(), // already logged in
+          () => {
+              oauth.authenticate(
+                  function handleSuccess() {
+                    this.setState({data: [], showError: false, showSuccess: true});
+                  },
+                  function handleError(error) {
+                    console.log('Failed to authenticate:' + error);
+                    this.setState({data: [], showError: true, showSuccess: false});
+                  }
+              );
+          });
+    }
+
     render() {
-        return (
-            <View style={styles.container}>
-              <FlatList
-                data={this.state.data}
-                renderItem={({item}) => <Text style={styles.item}>{item.Name}</Text>}
-                keyExtractor={(item, index) => index}
-              />
-            </View>
-        );
+
+      let errorMessage = this.state.showError ? <Text style={{color: 'red'}}>You were unable to log in!</Text> : null;
+      let successMessage = this.state.showSuccess ? <Text style={{color: 'green'}}>You were able to log in!</Text> : null;
+      return (
+        <View>
+          <View style={{backgroundColor: 'grey'}}>
+            <Button title="Login" onPress={this.onLogin.bind(this)}/>
+          </View>
+          {successMessage}
+          {errorMessage}
+        </View>
+
+      );
     }
 }
 
@@ -93,4 +103,3 @@ const styles = StyleSheet.create({
 export const App = StackNavigator({
     UserList: { screen: UserListScreen }
 });
-

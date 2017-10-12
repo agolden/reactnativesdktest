@@ -60,13 +60,15 @@
 ## Reproduce Issue ##
 
 1. Launch application (login screen appears)
-2. Select 'Use Custom Domain'
-3. Enter totally fake custom domain, e.g., 'ABCDEFG' (error message appears: "SERVER ERROR'; "Can't connect to the server....")
-4. Select 'Dismiss' (user is now stranded on a blue screen with no way to get back; no error messages appear in react native logs)
+2. Click 'Login' button (then wait a couple seconds for the Salesforce login screen to appear)
+3. Select 'Use Custom Domain'
+4. Enter totally fake custom domain, e.g., 'ABCDEFG' (error message appears: "SERVER ERROR'; "Can't connect to the server....")
+5. Select 'Dismiss' (user is now stranded on a blue screen with no way to get back; no error messages appear in react native logs)
 
 ## Expected Behavior ##
 
 1. Launch application (login screen appears)
-2. Select 'Use Custom Domain'
-3. Enter totally fake custom domain, e.g., 'ABCDEFG' (error message appears: "SERVER ERROR'; "Can't connect to the server....")
-4. Select 'Dismiss'; As shown in 'app.js' on line 55, the failure callback is invoked and 'Failed to authenticate' is written to the react native logs; User returned to the react-native app (i.e., the webview showing Salesforce is closed)
+2. Click 'Login' button (then wait a couple seconds for the Salesforce login screen to appear)
+3. Select 'Use Custom Domain'
+4. Enter totally fake custom domain, e.g., 'ABCDEFG' (error message appears: "SERVER ERROR'; "Can't connect to the server....")
+5. Select 'Dismiss'; As shown in 'app.js' on line 65, the failure callback is invoked and 'Failed to authenticate' is written to the react native logs; User returned to the react-native app, which now displays the error message "You were unable to log in!" below the login button.
